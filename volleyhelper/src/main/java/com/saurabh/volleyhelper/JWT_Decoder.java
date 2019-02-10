@@ -4,20 +4,18 @@ import android.util.Base64;
 
 import java.io.UnsupportedEncodingException;
 
-public abstract class JWT_Decoder {
-
-    public void Decode(String res) {
-        String[] split = res.split("\\.");
-        getHeader(getJson(split[0]));
+public abstract class JWT_Decoder implements IDecoder {
+    @Override
+    public void decode(String response) {
+        String[] split = response.split("\\.");
+        getHead(getJson(split[0]));
         try {
             getBody(getJson(split[1]));
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
 
-    abstract void getHeader(String head);
-    abstract void getBody(String body) throws Exception;
+    }
 
     private String getJson(String strEncoded) {
         byte[] decodedBytes = Base64.decode(strEncoded, Base64.URL_SAFE);
@@ -28,5 +26,4 @@ public abstract class JWT_Decoder {
             return null;
         }
     }
-
 }

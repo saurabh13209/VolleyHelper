@@ -10,10 +10,11 @@ import com.android.volley.toolbox.StringRequest;
 
 import java.util.Map;
 
-public abstract class PostRequest {
-    @Deprecated
-    public void Request(Context context, String URL){
-        StringRequest postRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
+public abstract class PostRequest implements IPostRequest{
+
+    @Override
+    public void request(Context context, String URL) {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 getResponse(response);
@@ -21,7 +22,7 @@ public abstract class PostRequest {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-
+                onError(error.toString());
             }
         }){
             @Override
@@ -29,10 +30,7 @@ public abstract class PostRequest {
                 return setParams();
             }
         };
-        RequestMaker.getInstance(context.getApplicationContext()).addToRequestQueue(postRequest);
+
+        RequestMaker.getInstance(context).addToRequestQueue(stringRequest);
     }
-
-
-    abstract void getResponse(String res);
-    abstract Map setParams();
 }
