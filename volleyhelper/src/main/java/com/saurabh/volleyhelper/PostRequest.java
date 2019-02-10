@@ -11,6 +11,7 @@ import com.android.volley.toolbox.StringRequest;
 import java.util.Map;
 
 public abstract class PostRequest {
+    @Deprecated
     public void Request(Context context, String URL){
         StringRequest postRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
             @Override
@@ -30,6 +31,7 @@ public abstract class PostRequest {
         };
         RequestMaker.getInstance(context.getApplicationContext()).addToRequestQueue(postRequest);
     }
+
 
     abstract void getResponse(String res);
     abstract Map setParams();

@@ -11,6 +11,7 @@ import com.android.volley.toolbox.StringRequest;
 import java.util.Map;
 
 public abstract class GetRequest {
+    @Deprecated
     public void Request(Context context, String URL){
         StringRequest postRequest = new StringRequest(Request.Method.GET, URL, new Response.Listener<String>() {
             @Override
