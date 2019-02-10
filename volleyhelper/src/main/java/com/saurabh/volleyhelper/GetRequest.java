@@ -10,22 +10,8 @@ import com.android.volley.toolbox.StringRequest;
 
 import java.util.Map;
 
-public abstract class GetRequest {
-    @Deprecated
-    public void Request(Context context, String URL){
-        StringRequest postRequest = new StringRequest(Request.Method.GET, URL, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                getResponse(response);
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
+interface GetRequest {
+    void Request(Context context , String URL);
 
-            }
-        });
-        RequestMaker.getInstance(context.getApplicationContext()).addToRequestQueue(postRequest);
-    }
-
-    abstract void getResponse(String res);
+    void getResponse(String s);
 }

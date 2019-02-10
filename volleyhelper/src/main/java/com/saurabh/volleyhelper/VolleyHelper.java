@@ -10,9 +10,11 @@ import com.android.volley.toolbox.StringRequest;
 
 import java.util.Map;
 
-public abstract class VolleyHelper {
-    public void Post(Context context,String URL){
-        StringRequest postRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
+public abstract class VolleyHelper implements GetRequest{
+
+    @Override
+    public void Request(Context context, String URL) {
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, "", new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 getResponse(response);
@@ -22,15 +24,7 @@ public abstract class VolleyHelper {
             public void onErrorResponse(VolleyError error) {
 
             }
-        }){
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                return setParams();
-            }
-        };
-        RequestMaker.getInstance(context.getApplicationContext()).addToRequestQueue(postRequest);
+        });
+        RequestMaker.getInstance(context).addToRequestQueue(stringRequest);
     }
-
-    abstract Map setParams();
-    abstract void getResponse(String res);
 }

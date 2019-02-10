@@ -15,16 +15,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        VolleyHelper volleyHelper = new VolleyHelper() {
+        new VolleyHelper() {
             @Override
-            Map setParams() {
-                return null;
-            }
-
-            @Override
-            void getResponse(String res) {
+            public void getResponse(String s) {
 
             }
-        };
+        }.Request(MainActivity.this,"");
     }
 }
