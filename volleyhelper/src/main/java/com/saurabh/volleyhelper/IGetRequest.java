@@ -7,4 +7,6 @@ public interface IGetRequest {
     void request(Context context, String URL);
 
     void getResponse(String res);
+
+    void onError(String err);
 }
